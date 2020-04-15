@@ -116,7 +116,7 @@ post-push-hook-tags = $(if $(call eq,$(tags),),$(TAGS),$(tags))
 
 post-push-hook:
 	@mkdir -p hooks/
-	docker run --rm -v "C:\\Repositories\\sentry-with-telegram/post_push.tmpl.php":/post_push.php:ro \
+	docker run --rm -v "$(PWD)/post_push.tmpl.php":/post_push.php:ro \
 		php:alpine php -f /post_push.php -- \
 			--image_tags='$(post-push-hook-tags)' \
 		> $(if $(call eq,$(out),),hooks/post_push,$(out))
